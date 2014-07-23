@@ -10,7 +10,7 @@ module Backup
       class << self
         private
 
-        # List the available database, storage, syncer, compressor, encryptor
+        # List the available database, executor, storage, syncer, compressor, encryptor
         # and notifier constants. These are used to define constant names within
         # Backup::Config::DSL so that users may use a constant instead of a string.
         # Nested namespaces are represented using Hashs. Deep nesting supported.
@@ -28,6 +28,8 @@ module Backup
             DSL,
             [ # Databases
               ['MySQL', 'PostgreSQL', 'MongoDB', 'Redis', 'Riak'],
+              # Executors
+              ['MySQLExec'],
               # Storages
               ['S3', 'CloudFiles', 'Ninefold', 'Dropbox', 'FTP',
               'SFTP', 'SCP', 'RSync', 'Local'],

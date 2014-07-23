@@ -8,7 +8,7 @@ module Backup
     NAMES = %w{
       tar cat split sudo chown hostname
       gzip bzip2
-      mongo mongodump mysqldump pg_dump pg_dumpall redis-cli riak-admin
+      mongo mongodump mysql mysqldump pg_dump pg_dumpall redis-cli riak-admin
       gpg openssl
       rsync ssh
       sendmail exim
@@ -76,6 +76,7 @@ module Backup
       #     # Database Utilities
       #     mongo       '/path/to/mongo'
       #     mongodump   '/path/to/mongodump'
+      #     mysql       '/path/to/mysql'
       #     mysqldump   '/path/to/mysqldump'
       #     pg_dump     '/path/to/pg_dump'
       #     pg_dumpall  '/path/to/pg_dumpall'

@@ -53,6 +53,10 @@ module Backup
     attr_reader :databases
 
     ##
+    # Array of configured Executor objects.
+    attr_reader :executors
+
+    ##
     # Array of configured Archive objects.
     attr_reader :archives
 
@@ -118,6 +122,7 @@ module Backup
       @package = Package.new(self)
 
       @databases  = []
+      @executors  = []
       @archives   = []
       @storages   = []
       @notifiers  = []
@@ -144,6 +149,13 @@ module Backup
     def database(name, database_id = nil, &block)
       @databases << get_class_from_scope(Database, name).
           new(self, database_id, &block)
+    end
+
+    ##
+    # Adds an Executor. Multiple Executors may be added to the model.
+    def executor(name, executor_id = nil, &block)
+      @executors << get_class_from_scope(Executor, name).
+          new(self, executor_id, &block)
     end
 
     ##
@@ -264,6 +276,8 @@ module Backup
 
       log!(:started)
       before_hook
+
+      executors.each(&:perform!)
 
       procedures.each do |procedure|
         procedure.is_a?(Proc) ? procedure.call : procedure.each(&:perform!)

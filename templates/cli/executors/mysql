@@ -1,0 +1,13 @@
+  ##
+  # MySQL [Executor]
+  #
+  executor MySQLExec do |exec|
+    db.name               = "my_database_name"
+    db.username           = "my_username"
+    db.password           = "my_password"
+    db.host               = "localhost"
+    db.port               = 3306
+    db.socket             = "/tmp/mysql.sock"
+    db.statement          = "flush logs"
+    db.additional_options = ["--quick", "--single-transaction"]
+  end

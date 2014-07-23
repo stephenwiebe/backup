@@ -31,6 +31,7 @@ describe Backup::Utilities do
         # Database Utilities
         mongo       '/path/to/mongo'
         mongodump   '/path/to/mongodump'
+        mysql       '/path/to/mysql'
         mysqldump   '/path/to/mysqldump'
         pg_dump     '/path/to/pg_dump'
         pg_dumpall  '/path/to/pg_dumpall'

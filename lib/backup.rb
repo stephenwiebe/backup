@@ -31,6 +31,7 @@ module Backup
   COMPRESSOR_PATH    = File.join(LIBRARY_PATH, 'compressor')
   ENCRYPTOR_PATH     = File.join(LIBRARY_PATH, 'encryptor')
   NOTIFIER_PATH      = File.join(LIBRARY_PATH, 'notifier')
+  EXECUTOR_PATH      = File.join(LIBRARY_PATH, 'executor')
   TEMPLATE_PATH      = File.expand_path('../../templates', __FILE__)
 
   ##
@@ -109,6 +110,13 @@ module Backup
     autoload :HttpPost,  File.join(NOTIFIER_PATH, 'http_post')
     autoload :Nagios,    File.join(NOTIFIER_PATH, 'nagios')
     autoload :FlowDock,  File.join(NOTIFIER_PATH, 'flowdock')
+  end
+
+  ##
+  # Autoload executor files
+  module Executor
+    autoload :Base,       File.join(EXECUTOR_PATH, 'base')
+    autoload :MySQL,      File.join(EXECUTOR_PATH, 'mysql')
   end
 
   ##
