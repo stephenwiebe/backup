@@ -27,7 +27,7 @@ module Backup
           create_modules(
             DSL,
             [ # Databases
-              ['MySQL', 'PostgreSQL', 'MongoDB', 'Redis', 'Riak'],
+              ['MySQL', 'PostgreSQL', 'MongoDB', 'Redis', 'Riak', 'OpenLDAP'],
               # Executors
               ['MySQLExec'],
               # Storages
@@ -44,7 +44,8 @@ module Backup
               ],
               # Notifiers
               ['Mail', 'Twitter', 'Campfire', 'Prowl',
-              'Hipchat', 'Pushover', 'HttpPost', 'Nagios', 'Slack', 'FlowDock']
+              'Hipchat', 'Pushover', 'HttpPost', 'Nagios',
+              'Slack', 'FlowDock', 'Zabbix']
             ]
           )
         end

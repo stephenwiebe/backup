@@ -2,37 +2,27 @@
 
 module Backup
   module Notifier
-    class Nagios < Base
+    class Zabbix < Base
 
-      ##
-      # Host of Nagios server to notify on backup completion.
-      attr_accessor :nagios_host
+      attr_accessor :zabbix_host
 
-      ##
-      # Port of Nagios server to notify on backup completion.
-      attr_accessor :nagios_port
+      attr_accessor :zabbix_port
 
-      ##
-      # Nagios nrpe configuration file.
-      attr_accessor :send_nsca_cfg     
- 
-      ##
-      # Name of the Nagios service for the backup check.
       attr_accessor :service_name
 
-      ##
-      # Host name in Nagios for the backup check.
       attr_accessor :service_host
+
+      attr_accessor :item_key
 
       def initialize(model, &block)
         super
         instance_eval(&block) if block_given?
 
-        @nagios_host  ||= Config.hostname
-        @nagios_port  ||= 5667
-        @send_nsca_cfg||= "/etc/nagios/send_nsca.cfg"
+        @zabbix_host  ||= Config.hostname
+        @zabbix_port  ||= 10051
         @service_name ||= "Backup #{ model.trigger }"
         @service_host ||= Config.hostname
+        @item_key     ||= 'backup_status'
       end
 
       private
@@ -64,11 +54,15 @@ module Backup
       end
 
       def send_message(message)
-        cmd = "#{ utility(:send_nsca) } -H '#{ nagios_host }' -p '#{ nagios_port }' -c '#{ send_nsca_cfg }'"
         msg = [service_host, service_name, model.exit_status, message].join("\t")
+        cmd = "#{ utility(:zabbix_sender) }" +
+              " -z '#{ zabbix_host }'" +
+              " -p '#{ zabbix_port }'" +
+              " -s #{ service_host }"  +
+              " -k #{ item_key }"      +
+              " -o '#{ msg }'"
         run("echo '#{ msg }' | #{ cmd }")
       end
-
     end
   end
 end

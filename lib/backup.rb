@@ -77,6 +77,7 @@ module Backup
     autoload :MongoDB,    File.join(DATABASE_PATH, 'mongodb')
     autoload :Redis,      File.join(DATABASE_PATH, 'redis')
     autoload :Riak,       File.join(DATABASE_PATH, 'riak')
+    autoload :OpenLDAP,   File.join(DATABASE_PATH, 'openldap')
   end
 
   ##
@@ -110,6 +111,7 @@ module Backup
     autoload :HttpPost,  File.join(NOTIFIER_PATH, 'http_post')
     autoload :Nagios,    File.join(NOTIFIER_PATH, 'nagios')
     autoload :FlowDock,  File.join(NOTIFIER_PATH, 'flowdock')
+    autoload :Zabbix,    File.join(NOTIFIER_PATH, 'zabbix')
   end
 
   ##

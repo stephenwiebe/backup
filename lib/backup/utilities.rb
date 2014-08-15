@@ -8,11 +8,13 @@ module Backup
     NAMES = %w{
       tar cat split sudo chown hostname
       gzip bzip2
-      mongo mongodump mysql mysqldump pg_dump pg_dumpall redis-cli riak-admin
+      mongo mongodump mysql mysqldump innobackupex
+      pg_dump pg_dumpall redis-cli riak-admin
       gpg openssl
       rsync ssh
       sendmail exim
       send_nsca
+      zabbix_sender
     }
 
     module DSL
@@ -95,6 +97,7 @@ module Backup
       #     sendmail  '/path/to/sendmail'
       #     exim      '/path/to/exim'
       #     send_nsca '/path/to/send_nsca'
+      #     zabbix_sender '/path/to/zabbix_sender'
       #   end
       #
       # These paths may be set using absolute paths, or relative to the
